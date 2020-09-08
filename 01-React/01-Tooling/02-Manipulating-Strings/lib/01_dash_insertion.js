@@ -1,13 +1,17 @@
+function isConsonant(letter) {
+  return !letter.match(/[aeiouy\s]/i);
+}
+
 function insertDash(word) {
-  // TODO: implement the method and return word with dashes
-  const vowels = ['a', 'e', 'i', 'o', 'u'];
-  const wordArr = word.split("");
-  for (let i = 1; i < wordArr.length; i++) {
-    if (vowels.includes(wordArr[i - 1]) && vowels.includes(wordArr[i]) {
-      wordArr.splice(i, 0, '-');
-    }
+  if (!word || word.length === 0) {
+    return "";
   }
-  return wordArr.join('');
+  return word.split("").map((letter, i, letters) => {
+    if (i > 0 && isConsonant(letters[i - 1]) && isConsonant(letter)) {
+      return `-${letter}`;
+    }
+    return letter;
+  }).join("");
 }
 
 module.exports = insertDash;
